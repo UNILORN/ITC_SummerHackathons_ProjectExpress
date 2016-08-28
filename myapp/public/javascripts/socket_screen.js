@@ -4,5 +4,15 @@
     socketio.emit("publish",{});
   }
   function alertMessage(){
-    document.write("<h1>Hellooooooooooooooo</h1>");
+    var jsonPath = './data.json';
+    var jqXHR = $.getJSON(jsonPath);
+
+    jqXHR.done(function(json) {
+      var vue = new Vue({
+        el: '.app',
+        data: {
+          message: json
+        }
+      });
+    });  
   }

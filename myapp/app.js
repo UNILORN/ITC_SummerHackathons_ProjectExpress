@@ -29,7 +29,12 @@ var io = require("socket.io")(server);
 
 io.sockets.on("connection", function (socket) {
   socket.on("publish", function () {
-    io.sockets.emit("publish", {});
+    io.sockets.emit("publish", function(name){
+      var fs = require('fs');
+      fs.appendFile('data.json', name ,'utf8', function (err) {
+        console.log(err);
+      });
+    });
   });
 });
 server.listen(3000)
